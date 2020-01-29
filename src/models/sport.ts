@@ -6,7 +6,7 @@ export class Sport {
     public id!: number;
     public name!: string;
 
-    constructor(input: Sport) {
-        Object.assign(this, input);
-    }
+        constructor(input: Sport) {
+            Object.assign(this, input);
+        }
 }

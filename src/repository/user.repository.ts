@@ -1,6 +1,5 @@
 import { User } from './../models/user';
 import { DbHandler } from '../core/db.handler';
-import { Sport } from '../models/sport';
 /**
  * Cette classe est un repository
  * C'est ici qu'on met tout les accès à la bdd
