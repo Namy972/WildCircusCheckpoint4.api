@@ -1,5 +1,4 @@
 import { User } from './../models/user';
-import { SportRepository } from '../repository/sport.repository';
 import { UserRepository } from '../repository/user.repository';
 import * as argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';

@@ -1,6 +1,3 @@
-import { Message } from './../models/message';
-
-import { User } from 'src/models/user';
 import { MessageRepository } from 'src/repository/message.repository';
 import { Message } from 'src/models/message';
 

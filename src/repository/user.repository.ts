@@ -17,16 +17,13 @@ export class UserRepository {
     }
 
     async save(user: User): Promise<any> {
-        return this.db.query(this.SAVE, user) as Promise<any>;
+        const postUser = await this.db.query(this.SAVE, user) as Promise<any>;
+        return postUser;
     }
 
     async findByEmail(email: string) {
-        const users: User[] = await (this.db.query(this.GET_BY_EMAIL, email) as Promise<User[]>);
-        let user = null;
-        if (users.length > 0) {
-            user = users[0];
-        }
-        return user;
+        const users = await (this.db.query(this.GET_BY_EMAIL, email) as Promise<User[]>);
+        return users[0] || null;
     }
 
 }
