@@ -1,6 +1,6 @@
 import express, { Router, Request, Response, Application } from 'express';
 import jwt from 'express-jwt';
-import { TemoignageService } from 'src/services/temoignage.service';
+import { TemoignageService } from '../services/temoignage.service';
 
 export const TemoignageController = (app: Application) => {
 
@@ -16,11 +16,11 @@ export const TemoignageController = (app: Application) => {
         }
     });
 
-    const secret = process.env.WILD_JWT_SECRET;
-    if (!secret) {
-        throw new Error('Pas de secret setup');
-    }
-    router.use(jwt({secret}));
+    // const secret = process.env.WILD_JWT_SECRET;
+    // if (!secret) {
+    //     throw new Error('Pas de secret setup');
+    // }
+    // router.use(jwt({secret}));
 
     router.get('/', async (req: Request, res: Response) => {
         try {
@@ -41,21 +41,21 @@ export const TemoignageController = (app: Application) => {
         }
     });
 
-    router.post('/post', async (req: Request, res: Response) => {
+    router.post('/post', (req: Request, res: Response) => {
         const objectRequest = req.body;
         try {
-            const temPost = await service.save(objectRequest[0], objectRequest[1]);
+            const temPost = service.save(objectRequest[0], objectRequest[1]);
             res.send(temPost);
         } catch (error) {
             res.status(409).send('Post impossible');
         }
     });
 
-    router.delete('/delete/:id', async (req: Request, res: Response) => {
+    router.delete('/delete/:id', (req: Request, res: Response) => {
         const id = parseInt(req.params.id, 10);
         try {
-            const temDelete = await service.delete(id);
-            res.send(temDelete);
+            service.delete(id);
+            res.send();
         } catch (error) {
             res.status(409).send('Delete impossible');
         }

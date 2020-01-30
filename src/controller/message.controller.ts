@@ -1,6 +1,6 @@
-import express, { Router, Request, Response, Application } from 'express';
+import express, { Application, Request, Response, Router } from 'express';
 import jwt from 'express-jwt';
-import { MessageService } from 'src/services/message.service';
+import { MessageService } from '../services/message.service';
 
 export const MessageController = (app: Application) => {
 
@@ -9,10 +9,12 @@ export const MessageController = (app: Application) => {
 
     router.post('/post', async (req: Request, res: Response) => {
             const message = req.body;
+            console.log(req.body);
             try {
-            const result = await service.save(message);
-            res.send(result);
+           await service.save(message);
+           res.send(message);
         } catch (error) {
+            console.log(error);
             res.status(404).send('Récupération impossible');
         }
     });
@@ -32,11 +34,11 @@ export const MessageController = (app: Application) => {
         }
     });
 
-    router.delete('/delete/:id', async (req: Request, res: Response) => {
+    router.delete('/delete/:id', (req: Request, res: Response) => {
         const id = parseInt(req.params.id, 10);
         try {
-            const temDelete = await service.delete(id);
-            res.send(temDelete);
+            service.delete(id);
+            res.send();
         } catch (error) {
             res.status(409).send('Delete impossible');
         }

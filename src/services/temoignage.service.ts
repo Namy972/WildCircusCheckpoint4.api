@@ -1,6 +1,6 @@
-import { Temoignage } from 'src/models/temoignage';
+import { Temoignage } from '../models/temoignage';
 import { TemoignageRepository } from './../repository/temoignage.repository';
-import { User } from 'src/models/user';
+import { User } from '../models/user';
 
 export class TemoignageService {
 

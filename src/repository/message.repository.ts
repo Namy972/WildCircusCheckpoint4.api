@@ -1,23 +1,23 @@
 import { DbHandler } from './../core/db.handler';
-import { Message } from 'src/models/message';
+import { Message } from '../models/message';
 export class MessageRepository {
     private db: DbHandler;
 
     private GET_ALL = 'SELECT * FROM message';
-    private POST_MESSAGE = 'INSERT INTO message SET ?';
-    private DELETE_MESSAGE = 'DELETE FROM message WHERE id = ?';
+    private POST_MESSAGE = 'INSERT INTO message SET ? ';
+    private DELETE_MESSAGE = 'DELETE FROM message WHERE id = ? ';
 
     constructor() {
         this.db = DbHandler.getInstance();
     }
-    async getAll(): Promise<Message[]> {
-        const result = await this.db.query(this.GET_ALL) as Promise<Message[]>;
+    getAll(): Promise<Message[]> {
+        const result = this.db.query(this.GET_ALL) as Promise<Message[]>;
         return result;
     }
 
-    async save(data: Message): Promise<Message> {
-        const posted = await this.db.query(this.POST_MESSAGE, data) as Promise<Message>;
-        return posted;
+    save(data: Message): Promise<any> {
+        return this.db.query(this.POST_MESSAGE, data) as Promise<Message>;
+
     }
 
     async delete(id: number): Promise<Message> {

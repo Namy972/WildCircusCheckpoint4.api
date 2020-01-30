@@ -1,5 +1,5 @@
 import { DbHandler } from './../core/db.handler';
-import { Temoignage } from 'src/models/temoignage';
+import { Temoignage } from '../models/temoignage';
 export class TemoignageRepository {
 
     private db: DbHandler;
