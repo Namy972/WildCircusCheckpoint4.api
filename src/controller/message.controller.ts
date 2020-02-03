@@ -9,21 +9,19 @@ export const MessageController = (app: Application) => {
 
     router.post('/post', async (req: Request, res: Response) => {
             const message = req.body;
-            console.log(req.body);
             try {
            await service.save(message);
            res.send(message);
         } catch (error) {
-            console.log(error);
             res.status(404).send('Récupération impossible');
         }
     });
 
-    const secret = process.env.WILD_JWT_SECRET;
-    if (!secret) {
-        throw new Error('Pas de secret setup');
-    }
-    router.use(jwt({secret}));
+    // const secret = process.env.WILD_JWT_SECRET;
+    // if (!secret) {
+    //     throw new Error('Pas de secret setup');
+    // }
+    // router.use(jwt({secret}));
 
     router.get('/', async (req: Request, res: Response) => {
         try {

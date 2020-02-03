@@ -3,9 +3,9 @@ import { Message } from '../models/message';
 export class MessageRepository {
     private db: DbHandler;
 
-    private GET_ALL = 'SELECT * FROM message';
-    private POST_MESSAGE = 'INSERT INTO message SET ? ';
-    private DELETE_MESSAGE = 'DELETE FROM message WHERE id = ? ';
+    private GET_ALL = 'SELECT * FROM Message';
+    private POST_MESSAGE = 'INSERT INTO Message SET ? ';
+    private DELETE_MESSAGE = 'DELETE FROM Message WHERE id = ? ';
 
     constructor() {
         this.db = DbHandler.getInstance();

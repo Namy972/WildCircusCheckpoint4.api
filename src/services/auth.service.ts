@@ -2,6 +2,7 @@ import { User } from './../models/user';
 import { UserRepository } from '../repository/user.repository';
 import * as argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
+import { randomBytes } from 'crypto';
 
 /**
  * Cette classe est un service
@@ -16,7 +17,8 @@ export class AuthService {
     }
 
     async signup(user: User) {
-        user.password = await argon2.hash(user.password);
+        const salt = randomBytes(32);
+        user.password = await argon2.hash(user.password, {salt});
         this.repository.save(user);
     }
 
@@ -37,10 +39,13 @@ export class AuthService {
             throw new Error('Pas de secret setup');
         }
 
-        const token2 = jwt.sign(userToken,  secret);
-        console.log(token2);
+        const token = jwt.sign(userToken,  secret);
 
-        return token2;
+        return {token, user};
+    }
+    async getById(id: number) {
+        const search = await this.repository.findById(id);
+        return search;
     }
 
 }

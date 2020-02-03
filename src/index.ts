@@ -1,3 +1,4 @@
+import { AuthController } from './controller/auth.controller';
 import { MessageController } from './controller/message.controller';
 import { TemoignageController } from './controller/temoignage.controller';
 import express from 'express';
@@ -17,6 +18,7 @@ async function startServer() {
   HistoriqueController(app);
   TemoignageController(app);
   MessageController(app);
+  AuthController(app);
 
   const authService = new AuthService();
   // authService.signup({email: 'toto@to.com', password: 'mypassword', firstname: 'Toto'});

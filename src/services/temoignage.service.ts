@@ -24,8 +24,8 @@ export class TemoignageService {
         }
         return validated;
     }
-    async update(id: number) {
-        const updated = await this.repository.update(id);
+    async update(element: Temoignage, id: number) {
+        const updated = await this.repository.update(element, id);
         if (!updated) {
             throw new Error('La requête n\'a pas abouti');
         }

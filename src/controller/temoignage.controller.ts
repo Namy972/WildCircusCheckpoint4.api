@@ -9,6 +9,7 @@ export const TemoignageController = (app: Application) => {
 
     router.get('/validated', async (req: Request, res: Response) => {
         try {
+
             const result = await service.getValidated();
             res.send(result);
         } catch (error) {
@@ -31,10 +32,11 @@ export const TemoignageController = (app: Application) => {
         }
     });
 
-    router.put('/:id', async (req: Request, res: Response) => {
+    router.put('update/:id', async (req: Request, res: Response) => {
         const id = parseInt(req.params.id, 10);
+        const element = req.body;
         try {
-            const update = await service.update(id);
+            const update = await service.update(element, id);
             res.send(update);
         } catch (error) {
             res.status(409).send('Update impossible');

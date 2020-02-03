@@ -4,11 +4,11 @@ export class TemoignageRepository {
 
     private db: DbHandler;
 
-    private GET_ALL = 'SELECT * FROM temoignage';
-    private GET_VALIDATED = 'SELECT * FROM temoignage WHERE validated = 1';
-    private UPDATE = 'UPDATE temoignage SET validated = 1 WHERE id = ?';
-    private POST = 'INSERT INTO temoignage SET ?';
-    private DELETE = 'DELETE FROM temoignage WHERE id = ?';
+    private GET_ALL = 'SELECT * FROM Temoignage';
+    private GET_VALIDATED = 'SELECT * FROM Temoignage WHERE validated = 1';
+    private UPDATE = 'UPDATE Temoignage SET ? WHERE id = ?';
+    private POST = 'INSERT INTO Temoignage SET ?';
+    private DELETE = 'DELETE FROM Temoignage WHERE id = ?';
 
     constructor() {
         this.db = DbHandler.getInstance();
@@ -18,11 +18,18 @@ export class TemoignageRepository {
         return result;
     }
     async getValidated(): Promise<Temoignage[]> {
-        const validated = await this.db.query(this.GET_VALIDATED) as Promise<Temoignage[]>;
-        return validated;
+        try {
+
+            const validated = await this.db.query(this.GET_VALIDATED) as Promise<Temoignage[]>;
+            return validated;
+        } catch (error) {
+
+            throw new Error(error);
+
+        }
     }
-    async update(id: number): Promise<Temoignage> {
-        const updated = await this.db.query(this.UPDATE, id) as Promise<Temoignage>;
+    async update(element: Temoignage, id: number): Promise<Temoignage> {
+        const updated = await this.db.query(this.UPDATE, [element, id]) as Promise<Temoignage>;
         return updated;
     }
 

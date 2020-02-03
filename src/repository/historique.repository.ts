@@ -4,8 +4,8 @@ export class HistoriqueRepository {
 
 private db: DbHandler;
 
-    private GET_BY_USER_ID = 'SELECT * FROM historique WHERE user_id = ?';
-    private POST_NEW_HISTO = 'INSERT INTO historique';
+    private GET_BY_USER_ID = 'SELECT * FROM Historique WHERE user_id = ?';
+    private POST_NEW_HISTO = 'INSERT INTO Historique';
 
 constructor() {
     this.db = DbHandler.getInstance();

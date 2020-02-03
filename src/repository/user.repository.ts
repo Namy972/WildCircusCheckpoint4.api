@@ -9,8 +9,9 @@ import { DbHandler } from '../core/db.handler';
 export class UserRepository {
     private db: DbHandler;
 
-    private SAVE = 'INSERT INTO user SET ?';
-    private GET_BY_EMAIL = ' SELECT * FROM user where email = ? ;';
+    private SAVE = 'INSERT INTO User SET ? ';
+    private GET_BY_EMAIL = ' SELECT * FROM User WHERE email = ? ';
+    private GET_BY_ID = ' SELECT * FROM User WHERE id = ? ';
 
     constructor() {
         this.db =  DbHandler.getInstance();
@@ -22,8 +23,12 @@ export class UserRepository {
     }
 
     async findByEmail(email: string) {
-        const users = await (this.db.query(this.GET_BY_EMAIL, email) as Promise<User[]>);
+        const users = await (this.db.query(this.GET_BY_EMAIL, email));
         return users[0] || null;
+    }
+    async findById(id: number) {
+        const user = await (this.db.query(this.GET_BY_ID, id));
+        return user[0] || null;
     }
 
 }
